@@ -5,7 +5,7 @@
         </h2>
 
 
-        <img src="{{$user->avatar}}" alt="user-avatar" srcset="">
+        <img class="w-4 h-8 rounded-full" src="{{"/storage/$user->avatar"}}" alt="user-avatar" srcset="">
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             Add User Avatar
