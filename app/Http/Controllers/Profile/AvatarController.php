@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 
 class AvatarController extends Controller
 {
-    public function update(){
-        return view('dashboard');
-        //return back()->with(['message','Success']);
+    public function update(Request $request){
+        $request->validate([
+            'avatar' => ['required','image'],
+        ]);
+        $path = $request->file('avatar')->store('avatars');
+        auth()->user()->update(['avatar'=> storage_path('app')."/$path"]);
+        return redirect(route('profile.edit'))->with('message', 'Avatar is updated');
     }
 }
