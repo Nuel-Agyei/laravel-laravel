@@ -4,6 +4,9 @@
             User Avatar
         </h2>
 
+
+        <img src="{{$user->avatar}}" alt="user-avatar" srcset="">
+
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             Add User Avatar
         </p>
