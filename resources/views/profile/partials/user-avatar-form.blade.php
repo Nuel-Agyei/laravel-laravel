@@ -3,14 +3,29 @@
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             User Avatar
         </h2>
-
-
-        <img class="w-12 h-12 rounded-full" src="{{"/storage/$user->avatar"}}" alt="user-avatar" srcset="">
-
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
             Add User Avatar
         </p>
     </header>
+
+
+ <img class="w-24 h-24 rounded-full" src="{{"/storage/$user->avatar"}}" alt="user-avatar" srcset="">
+
+
+
+ <form action="{{route('profile.avatar.ai')}}" method="post">
+    @csrf
+
+    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+        Generate Avatar Using AI
+    </p>
+
+        <x-primary-button>Generate Avatar</x-primary-button>
+
+
+    </form>
+
+
 
     @if (session('message'))
     <div class="text-red-500">
