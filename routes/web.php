@@ -40,10 +40,11 @@ require __DIR__.'/auth.php';
 Route::get('/openai', function(){
 
 
-$result = OpenAI::completions()->create([
-    'model' => 'text-davinci-003',
-    'prompt' => 'PHP is',
+$result = OpenAI::images()->create([
+   "prompt"=> "create an avatar with user name".auth()->user()->name,
+   'n' => 2,
+   'size' => "256x256"
 ]);
 
-echo $result['choices'][0]['text'];
+dd($result);
 });
