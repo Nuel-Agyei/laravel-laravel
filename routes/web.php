@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use OpenAI\Laravel\Facades\OpenAI;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,20 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
    return view('welcome');
-   //$users = DB::table('users')->where('id, 1')->get();
-//    $user = DB::table('users')->insert([
-//     'name' => 'Nuel',
-//     'email' => 'add1@NBC.com',
-//     'password' => 'password'
-//    ]);
-// $users = User::create([
-//     'name' => 'Nuel1',
-//     'email'=> 'deez@NBC.com',
-//     'password' => 'password'
-// ]);
-//$users = User::find(4);
-//$users = User::all();
- //  dd($users->name);
  });
 
 Route::get('/dashboard', function () {
@@ -48,3 +35,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/openai', function(){
+
+
+$result = OpenAI::completions()->create([
+    'model' => 'text-davinci-003',
+    'prompt' => 'PHP is',
+]);
+
+echo $result['choices'][0]['text']; // an open-source, widely-used, server-side scripting language.
+});
