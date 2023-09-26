@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use OpenAI\Laravel\Facades\OpenAI;
 
 /*
@@ -40,10 +41,6 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/openai', function(){
-
-
-
-
-dd($result);
+Route::get('/auth/redirect', function(){
+    return Socialite::driver('github')->redirect();
 });
