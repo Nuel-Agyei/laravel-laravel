@@ -56,8 +56,8 @@ Route::get('/auth/callback', function () {
     return redirect('/dashboard');
 });
 
-Route::middleware('auth')->group(function(){
-    Route::get('/ticket/create', [TicketController::class, 'create'])->name('ticket.create');
-    Route::get('/ticket/create', [TicketController::class, 'store'])->name('ticket.store');
+Route::middleware('auth')->prefix('ticket')->group(function(){
+    Route::resource('ticket', TicketController::class);
+    // Route::get('random');
 });
 
