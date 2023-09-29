@@ -15,7 +15,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::all();
+        return view('ticket.index', compact('tickets'))->with('tickets', $tickets);
     }
 
     /**
@@ -63,7 +64,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        return view('ticket.show', compact('ticket'));
     }
 
     /**
@@ -88,6 +89,6 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         $ticket->delete();
-        return response()->redirect();
+        return response()->redirect(route('ticket.index'));
     }
 }
