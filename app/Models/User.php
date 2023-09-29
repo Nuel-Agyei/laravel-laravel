@@ -58,4 +58,13 @@ class User extends Authenticatable
         set: fn($value)=> bcrypt($value)
 );
     }
+protected function isAdmin(): Attribute
+    {
+        $admins = ['deez@deez.com'];
+        return Attribute::make(
+            get: fn() => in_array($this->email, $admins)
+        );
+    }
 }
+
+
