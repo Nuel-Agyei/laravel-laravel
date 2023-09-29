@@ -103,3 +103,14 @@ class TicketController extends Controller
         return response()->redirect(route('ticket.index'));
     }
 }
+
+
+protected function storeAttachment($request, $ticket)
+    {
+        $ext      = $request->file('attachment')->extension();
+        $contents = file_get_contents($request->file('attachment'));
+        $filename = Str::random(25);
+        $path     = "attachments/$filename.$ext";
+        Storage::disk('public')->put($path, $contents);
+        $ticket->update(['attachment' => $path]);
+    }
