@@ -47,23 +47,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    protected function name():Attribute
+    protected function name(): Attribute
     {
         return Attribute::make(
-            get: fn($value)=>Str::upper($value)
+            get: fn ($value) => Str::upper($value)
         );
     }
-    protected function password():Attribute
-    {
-        return Attribute::make(
-        set: fn($value)=> bcrypt($value)
-);
-    }
-protected function isAdmin(): Attribute
+//     protected function password():Attribute
+//     {
+//         return Attribute::make(
+//         set: fn($value)=> bcrypt($value)
+// );
+//     }
+    protected function isAdmin(): Attribute
     {
         $admins = ['deez@deez.com'];
         return Attribute::make(
-            get: fn() => in_array($this->email, $admins)
+            get: fn () => in_array($this->email, $admins)
         );
     }
 

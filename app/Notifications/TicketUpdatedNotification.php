@@ -18,7 +18,6 @@ class TicketUpdatedNotification extends Notification
      */
     public function __construct(public Ticket $ticket)
     {
-        //
     }
 
     /**
@@ -36,22 +35,10 @@ class TicketUpdatedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-                    ->greeting('Hello {$notifiable->name}')
-                    ->line('Ticket is updated.')
-                    ->action('Notification Action', route('ticket.show', $this->$ticket->id))
-                    ->line('Thank you for using our application!');
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
-    {
-        return [
-            //
-        ];
+        return (new MailMessage())
+            ->greeting("Hello {$notifiable->name}")
+            ->line('Ticket is updated')
+            ->action('Check Ticket', route('ticket.show', $this->ticket->id))
+            ->line('Thank you for using our application!');
     }
 }

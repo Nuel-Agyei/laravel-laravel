@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
+use App\Notifications\TicketUpdatedNotification;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -103,7 +104,7 @@ class TicketController extends Controller
         $ticket->delete();
         return response()->redirect(route('ticket.index'));
     }
-}
+
 
 
 protected function storeAttachment($request, $ticket)
@@ -115,3 +116,4 @@ protected function storeAttachment($request, $ticket)
         Storage::disk('public')->put($path, $contents);
         $ticket->update(['attachment' => $path]);
     }
+}
