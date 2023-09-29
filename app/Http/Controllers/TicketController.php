@@ -72,7 +72,7 @@ class TicketController extends Controller
      */
     public function edit(Ticket $ticket)
     {
-        //
+        return view('ticket.edit', compact('ticket'));
     }
 
     /**
@@ -80,7 +80,18 @@ class TicketController extends Controller
      */
     public function update(UpdateTicketRequest $request, Ticket $ticket)
     {
-        //
+        $ticket->update($request->except('attachment'));
+
+        if ($request->has('status')) {
+            // $user = User::find($ticket->usephp ar_id);
+            $ticket->user->notify(new TicketUpdatedNotification($ticket));
+        }
+
+        if ($request->file('attachment')) {
+            Storage::disk('public')->delete($ticket->attachment);
+            $this->storeAttachment($request, $ticket);
+        }
+        return redirect(route('ticket.index'));
     }
 
     /**
