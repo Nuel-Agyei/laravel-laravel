@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Ticket;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,10 +12,11 @@ class TicketUpdatedNotification extends Notification
 {
     use Queueable;
 
+
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(public Ticket $ticket)
     {
         //
     }
@@ -35,8 +37,9 @@ class TicketUpdatedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->greeting('Hello {$notifiable->name}')
+                    ->line('Ticket is updated.')
+                    ->action('Notification Action', route('ticket.show', $this->$ticket->id))
                     ->line('Thank you for using our application!');
     }
 

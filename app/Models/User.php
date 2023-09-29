@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -65,6 +66,11 @@ protected function isAdmin(): Attribute
             get: fn() => in_array($this->email, $admins)
         );
     }
+
+protected function tickets(): HasMany
+{
+    return $this->hasMany(Ticket::class);
+}
 }
 
 
