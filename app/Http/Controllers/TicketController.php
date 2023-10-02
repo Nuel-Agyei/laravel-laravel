@@ -18,7 +18,7 @@ class TicketController extends Controller
     {
         $user = auth()->user();
         $tickets = $user->isAdmin ? Ticket::latest()->get() : $user->tickets;
-        return view('ticket.index', compact('tickets'))->with('tickets', $tickets);
+        return view('ticket.index', compact('tickets'));
     }
 
     /**
@@ -38,7 +38,6 @@ class TicketController extends Controller
         $ticket = Ticket::create([
             'title' => $request->title,
             'description' => $request->description,
-            // 'attachment' => '',
             'user_id' => auth()->id(),
         ]);
         return response($ticket);

@@ -4,7 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Attribute;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -61,7 +62,7 @@ class User extends Authenticatable
 //     }
     protected function isAdmin(): Attribute
     {
-        $admins = ['deez@deez.com'];
+        $admins = ['deez@admin.com'];
         return Attribute::make(
             get: fn () => in_array($this->email, $admins)
         );
